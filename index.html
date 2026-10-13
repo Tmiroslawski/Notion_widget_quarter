@@ -5,11 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- WSTAW SWÓJ IDENTYFIKATOR ADOBE FONTS -->
+  <<link rel="stylesheet" href="https://use.typekit.net/rcl8fkm.css">>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      padding: 16px;
-      font-family: Arial, sans-serif;
+      padding: 8px;
       background: transparent;
       color: #222222;
     }
@@ -17,39 +23,41 @@
     .widget {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      align-items: flex-start;
+      gap: 0;
+      font-family: "paralucent", sans-serif;
     }
 
     .quarter {
-      font-size: 50px;
-      font-weight: 900;
-      line-height: 1.2;
+      font-family: "paralucent", sans-serif;
+      font-size: 80pt;
+      font-weight: 800;
+      font-style: normal;
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      margin: 0;
+      padding: 0;
     }
 
     .month {
-      font-size: 20px;
-      font-weight: 400;
-      line-height: 1.4;
+      font-family: "paralucent", sans-serif;
+      font-size: 20pt;
+      font-weight: 200;
+      font-style: normal;
+      line-height: 1.2;
+      margin: 4px 0 0 2px;
+      padding: 0;
     }
   </style>
 </head>
 
 <body>
-  <div class="widget">
+  <main class="widget">
     <div class="quarter" id="quarter">Q 1</div>
     <div class="month" id="month">Styczeń</div>
-  </div>
+  </main>
 
   <script>
-    const now = new Date();
-
-    // Odczyt aktualnego miesiąca: 0 = styczeń
-    const monthIndex = now.getMonth();
-
-    // Obliczenie kwartału
-    const quarter = Math.floor(monthIndex / 3) + 1;
-
-    // Nazwy miesięcy po polsku
     const months = [
       "Styczeń",
       "Luty",
@@ -65,12 +73,23 @@
       "Grudzień"
     ];
 
-    // Wyświetlenie wyników
-    document.getElementById("quarter").textContent =
-      `Q ${quarter}`;
+    function updateDate() {
+      const now = new Date();
+      const monthIndex = now.getMonth();
+      const quarter = Math.floor(monthIndex / 3) + 1;
 
-    document.getElementById("month").textContent =
-      months[monthIndex];
+      document.getElementById("quarter").textContent =
+        `Q ${quarter}`;
+
+      document.getElementById("month").textContent =
+        months[monthIndex];
+    }
+
+    updateDate();
+
+    // Aktualizacja również po zmianie daty podczas
+    // pozostawienia strony otwartej.
+    setInterval(updateDate, 60000);
   </script>
 </body>
 </html>
